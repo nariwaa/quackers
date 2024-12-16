@@ -38,9 +38,12 @@ pkgs.mkShell {
   buildInputs = [
     pythonWithPackages
     pythonPackages.pip
+    pkgs.python312  # Explicitly add Python 3.12
   ];
 
   shellHook = ''
     echo "Python environment ready"
+    export PYTHONPATH=${pythonWithPackages}/${pythonWithPackages.python.sitePackages}
+    alias py='python3'
   '';
 }
